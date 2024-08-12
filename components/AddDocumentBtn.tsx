@@ -7,15 +7,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Loader from "./Loader";
 
-const AddDocumentBtn =  ({ userId, email }: AddDocumentBtnProps) => {
+const AddDocumentBtn = ({ userId, userName, email }: AddDocumentBtnProps) => {
   const [loading, setLoading] = useState(false);
-
+  console.log("Current userName: ", userName);
   const router = useRouter();
 
   const addDocumentHandler = async () => {
     setLoading(true);
     try {
-      const room = await createDocument({ userId, email });
+      const room = await createDocument({ userId, userName, email });
 
       if (room) {
         router.push(`/documents/${room.id}`);
@@ -25,7 +25,6 @@ const AddDocumentBtn =  ({ userId, email }: AddDocumentBtnProps) => {
       console.log(error);
       setLoading(false);
     }
-
   };
 
   return (

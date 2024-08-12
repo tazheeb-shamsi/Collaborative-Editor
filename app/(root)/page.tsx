@@ -14,7 +14,9 @@ import { redirect } from "next/navigation";
 const Home = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect("/sign-in");
+  const { id, fullName ,emailAddresses} = clerkUser;
   const currentUserEmail = clerkUser.emailAddresses[0].emailAddress;
+  console.log("Current userID&Name: ", id, fullName);
 
   const roomDocuments = await getDocuments(
     clerkUser.emailAddresses[0].emailAddress
@@ -36,8 +38,9 @@ const Home = async () => {
           <div className="document-list-title">
             <h3 className="text-28-semibold">All documents</h3>
             <AddDocumentBtn
-              userId={clerkUser.id}
-              email={clerkUser.emailAddresses[0].emailAddress}
+              userId={id}
+              userName={fullName}
+              email={emailAddresses[0].emailAddress}
             />
           </div>
           <ul className="document-ul">
@@ -67,7 +70,7 @@ const Home = async () => {
                 ) : (
                   <p className="text-white">
                     <UserCog />
-                    <span className="text-blue-200">{clerkUser.fullName}</span>
+                    <span className="text-blue-200">{metadata.name}</span>
                   </p>
                 )}
               </li>
@@ -86,6 +89,7 @@ const Home = async () => {
 
           <AddDocumentBtn
             userId={clerkUser.id}
+            userName={clerkUser.fullName}
             email={clerkUser.emailAddresses[0].emailAddress}
           />
         </div>
