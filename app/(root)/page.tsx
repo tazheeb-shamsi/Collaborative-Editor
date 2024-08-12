@@ -13,14 +13,17 @@ import { redirect } from "next/navigation";
 
 const Home = async () => {
   const clerkUser = await currentUser();
-  if (!clerkUser) redirect("/sign-in");
-  const { id, fullName ,emailAddresses} = clerkUser;
-  const currentUserEmail = clerkUser.emailAddresses[0].emailAddress;
-  console.log("Current userID&Name: ", id, fullName);
 
-  const roomDocuments = await getDocuments(
-    clerkUser.emailAddresses[0].emailAddress
-  );
+  if (!clerkUser) redirect("/sign-in");
+  const { id, fullName, emailAddresses } = clerkUser;
+
+  const roomDocuments = await getDocuments(emailAddresses[0].emailAddress);
+
+  console.log({
+    "Current userID": id,
+    "Current userName": fullName,
+    "Current email": emailAddresses,
+  });
 
   return (
     <main className="home-container">
@@ -65,7 +68,7 @@ const Home = async () => {
                     </p>
                   </div>
                 </Link>
-                {metadata.email === currentUserEmail ? (
+                {metadata.email === emailAddresses[0].emailAddress ? (
                   <DeleteModal roomId={id} />
                 ) : (
                   <p className="text-white">
@@ -87,11 +90,13 @@ const Home = async () => {
             className="mx-auto"
           />
 
-          <AddDocumentBtn
-            userId={clerkUser.id}
-            userName={clerkUser.fullName}
-            email={clerkUser.emailAddresses[0].emailAddress}
-          />
+          {
+            <AddDocumentBtn
+              userId={clerkUser.id}
+              userName={clerkUser.fullName}
+              email={clerkUser.emailAddresses[0].emailAddress}
+            />
+          }
         </div>
       )}
     </main>

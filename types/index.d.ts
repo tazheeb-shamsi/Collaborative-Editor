@@ -18,7 +18,7 @@ declare type RoomMetadata = {
 
 declare type CreateDocumentParams = {
   userId: string;
-  userName: string;
+  userName: string | null;
   email: string;
 };
 
@@ -73,7 +73,7 @@ declare type CollaborativeRoomProps = {
 
 declare type AddDocumentBtnProps = {
   userId: string;
-  userName: string;
+  userName: string | null;
   email: string;
 };
 
