@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-'use client';
-
-import Theme from './plugins/Theme';
-import ToolbarPlugin from './plugins/ToolbarPlugin';
-import { HeadingNode } from '@lexical/rich-text';
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
-import { LexicalComposer } from '@lexical/react/LexicalComposer';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import React from 'react';
-=======
 "use client";
 
 import Theme from "./plugins/Theme";
@@ -39,7 +25,7 @@ import { useThreads } from "@liveblocks/react/suspense";
 import Comments from "../Comments";
 import { DeleteModal } from "../DeleteModal";
 import { useUser } from "@clerk/nextjs";
->>>>>>> master
+import { UserCog } from "lucide-react";
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -49,11 +35,6 @@ function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
-<<<<<<< HEAD
-export function Editor() {
-  const initialConfig = {
-    namespace: 'Editor',
-=======
 export function Editor({
   roomId,
   currentUserType,
@@ -71,43 +52,29 @@ export function Editor({
 
   const initialConfig = liveblocksConfig({
     namespace: "Editor",
->>>>>>> master
     nodes: [HeadingNode],
     onError: (error: Error) => {
       console.error(error);
       throw error;
     },
     theme: Theme,
-<<<<<<< HEAD
-  };
-=======
     editable: currentUserType === "editor",
   });
->>>>>>> master
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-<<<<<<< HEAD
-        <ToolbarPlugin />
-
-        <div className="editor-inner h-[1100px]">
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable className="editor-input h-full" />
-            }
-            placeholder={<Placeholder />}
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <HistoryPlugin />
-          <AutoFocusPlugin />
-=======
         <div className="toolbar-wrapper flex min-w-full justify-between">
           <ToolbarPlugin />
           {currentUserType === "editor" &&
-            roomMetadata.email === currentUserEmail && (
-              <DeleteModal roomId={roomId} />
-            )}
+          roomMetadata.email === currentUserEmail ? (
+            <DeleteModal roomId={roomId} />
+          ) : (
+              <p className="text-white flex items-center gap-2">
+                <UserCog />
+                <span className="text-blue-300">{roomMetadata.email}</span>
+              </p>
+          )}
         </div>
 
         <div className="editor-wrapper flex flex-col items-center justify-start">
@@ -133,7 +100,6 @@ export function Editor({
             <FloatingThreads threads={threads} />
             <Comments />
           </LiveblocksPlugin>
->>>>>>> master
         </div>
       </div>
     </LexicalComposer>

@@ -6,6 +6,7 @@ import { getDocuments } from "@/lib/actions/room.actions";
 import { dateConverter } from "@/lib/utils";
 import { SignedIn, UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import { UserCog } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -61,10 +62,13 @@ const Home = async () => {
                     </p>
                   </div>
                 </Link>
-                {metadata.email === currentUserEmail && (
-                  <>
-                    <DeleteModal roomId={id} />
-                  </>
+                {metadata.email === currentUserEmail ? (
+                  <DeleteModal roomId={id} />
+                ) : (
+                  <p className="text-white">
+                    <UserCog />
+                    <span className="text-blue-200">{clerkUser.fullName}</span>
+                  </p>
                 )}
               </li>
             ))}
