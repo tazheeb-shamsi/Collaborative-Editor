@@ -79,7 +79,7 @@ export function Editor({
 
         <div className="editor-wrapper flex flex-col items-center justify-start">
           {status === "not-loaded" || status === "loading" ? (
-            <Loader>Loading...</Loader>
+            <Loader/>
           ) : (
             <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
               <RichTextPlugin

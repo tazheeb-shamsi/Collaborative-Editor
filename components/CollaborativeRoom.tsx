@@ -73,7 +73,7 @@ const CollaborativeRoom = ({
 
   return (
     <RoomProvider id={roomId}>
-      <ClientSideSuspense fallback={<Loader>Loading...</Loader>}>
+      <ClientSideSuspense fallback={<Loader/>}>
         <div className="collaborative-room">
           <Header>
             <div
@@ -114,7 +114,7 @@ const CollaborativeRoom = ({
 
               {loading && (
                 <p className="text-sm text-gray-400">
-                  <Loader> </Loader>
+                  <Loader/>
                 </p>
               )}
             </div>

@@ -1,6 +1,8 @@
 import Image from "next/image";
-
-const Loader = ({ children }: { children: string }) => {
+interface LoaderProps {
+  children?: string;
+}
+const Loader = ({ children }: LoaderProps) => {
   return (
     <div className="loader">
       <Image
@@ -10,7 +12,7 @@ const Loader = ({ children }: { children: string }) => {
         height={18}
         className="animate-spin"
       />
-      {children || 'Loading...'}
+      {children || "Loading..."}
     </div>
   );
 };

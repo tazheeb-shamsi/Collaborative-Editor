@@ -75,7 +75,7 @@ const Collaborator = ({
             type="button"
             onClick={() => removeCollaboratorHandler(collaborator.email)}
           >
-            {loading ? <Loader> </Loader> : "Remove"}
+            {loading ? <Loader /> : "Remove"}
           </Button>
         </div>
       )}
