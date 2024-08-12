@@ -9,7 +9,6 @@ import Loader from "./Loader";
 
 const AddDocumentBtn = ({ userId, userName, email }: AddDocumentBtnProps) => {
   const [loading, setLoading] = useState(false);
-  console.log("Current userName: ", userName);
   const router = useRouter();
 
   const addDocumentHandler = async () => {

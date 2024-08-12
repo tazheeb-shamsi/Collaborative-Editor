@@ -16,14 +16,10 @@ const Home = async () => {
 
   if (!clerkUser) redirect("/sign-in");
   const { id, fullName, emailAddresses } = clerkUser;
-
+  const userName = fullName ?? " ";
   const roomDocuments = await getDocuments(emailAddresses[0].emailAddress);
 
-  console.log({
-    "Current userID": id,
-    "Current userName": fullName,
-    "Current email": emailAddresses,
-  });
+ 
 
   return (
     <main className="home-container">
@@ -42,7 +38,7 @@ const Home = async () => {
             <h3 className="text-28-semibold">All documents</h3>
             <AddDocumentBtn
               userId={id}
-              userName={fullName}
+              userName={userName}
               email={emailAddresses[0].emailAddress}
             />
           </div>
@@ -92,9 +88,9 @@ const Home = async () => {
 
           {
             <AddDocumentBtn
-              userId={clerkUser.id}
-              userName={clerkUser.fullName}
-              email={clerkUser.emailAddresses[0].emailAddress}
+              userId={id}
+              userName={userName}
+              email={emailAddresses[0].emailAddress}
             />
           }
         </div>

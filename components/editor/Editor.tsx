@@ -42,7 +42,7 @@ export function Editor({
 }: {
   roomId: string;
   currentUserType: UserType;
-  roomMetadata: any;
+  roomMetadata: RoomMetadata;
 }) {
   const clerkUser = useUser();
   const currentUserEmail = clerkUser.user?.emailAddresses[0].emailAddress;
